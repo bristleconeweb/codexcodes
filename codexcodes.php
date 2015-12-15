@@ -12,3 +12,19 @@ License URI:        https://github.com/bristweb/codexcodes/blob/master/LICENSE
 */
 
 namespace CodexCodes;
+
+/**
+ * Add clear link to documentation from plugins list
+ */
+function plugin_row_meta($links, $file) {
+    $plugin = plugin_basename(__FILE__);
+    if ($file == $plugin) {
+        return array_merge(
+            $links,
+            array( sprintf( '<a target="_blank" href="https://github.com/bristweb/codexcodes">%s</a>',  __('Documentation') ) )
+        );
+    }
+    return $links;
+}
+add_filter( 'plugin_row_meta',  __NAMESPACE__ . '\\plugin_row_meta', 10, 2 );
+
