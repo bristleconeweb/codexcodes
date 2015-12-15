@@ -13,6 +13,21 @@ License URI:        https://github.com/bristweb/codexcodes/blob/master/LICENSE
 
 namespace CodexCodes;
 
+function load_shortcodes() {
+  foreach (glob(__DIR__ . '/library/*') as $dir) {
+     require_once $dir . '/index.php';
+     load_templates($dir);
+     add_shortcode( basename($dir),  'CodexCodes\\' . basename($dir) . '\\' . basename($dir) . '_shortcode_handler' );
+  }
+}
+
+function load_templates($dir) {
+	foreach (glob($dir . '/templates/*.php') as $file) {
+     require_once $file;
+  }
+}
+add_action('after_setup_theme', __NAMESPACE__ . '\\load_shortcodes', 100);
+
 /**
  * Add clear link to documentation from plugins list
  */
