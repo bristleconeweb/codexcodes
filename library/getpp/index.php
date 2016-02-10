@@ -51,7 +51,6 @@ function getpp_arg_dynamic_replacements($args){
 		'child_of'	=> 'getpp_replace_hierarchicals', 
 		'include'	=> 'getpp_replace_hierarchicals', 
 		'exclude'	=> 'getpp_replace_hierarchicals', 
-		'category'	=> 'getpp_replace_categoricals',
 		'post_type'	=> 'getpp_auto_set_post_type'
 		);
 	foreach ($args as $key => $value){
@@ -73,12 +72,5 @@ function getpp_replace_hierarchicals($value){
 	$value = str_replace('this', get_the_ID(), $value);
 	$value = str_replace('parent', wp_get_post_parent_id(get_the_ID()), $value);
 	$value = str_replace('top', end(get_post_ancestors(get_the_ID())), $value);
-	return $value;	
-}
-
-function getpp_replace_categoricals($value){
-	$defaults = array('fields' => 'ids');
-	$value = str_replace('this', implode(',',wp_get_post_categories(get_the_ID(),$defaults)), $value);
-	getpp_catrelation_this($value);
 	return $value;	
 }

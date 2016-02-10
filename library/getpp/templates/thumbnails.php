@@ -10,7 +10,7 @@ require_once('utils/utils.php');
  */
 function getpp_template_thumbnails($posts, $args){
 	$output = '';
-	$format = '<li class="span3"><a class="thumbnail" href="%2$s">%3$s<div class="text-center">%1$s</div></a></li>';
+	$format = '<div class="col-xs-6 col-md-3"><a class="thumbnail" href="%2$s">%3$s<div class="text-center">%1$s</div></a></div>';
 	global $post;
 	foreach( $posts as $post ) : setup_postdata($post); 
 		if(getpp_depth_permitted($args['depth'],getpp_depth(get_the_ID(),$post->ID))){
@@ -21,6 +21,6 @@ function getpp_template_thumbnails($posts, $args){
 			$output .= vsprintf($format,$vars);
 		}
 	endforeach; wp_reset_postdata();
-	return '<div class="row-fluid"><ul class="thumbnails">' . $output . '</ul></div>';
+	return '<div class="row">' . $output . '</div>';
 }
 add_filter('getpp_template_thumbnails','getpp_template_thumbnails',10,2); 
