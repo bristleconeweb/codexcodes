@@ -12,8 +12,9 @@ function getpp_template_text($posts, $args){
 	$output = '';
 	$format = '<p><a href="%1$s"><h4 class="media-heading">%2$s</h4></a>%3$s</p>';
 	global $post;
+	$urlid = get_the_ID();
 	foreach( $posts as $post ) : setup_postdata($post); 
-		if(getpp_depth_permitted($args['depth'],getpp_depth(get_the_ID(),$post->ID))){
+		if(getpp_depth_permitted($args['depth'],getpp_depth($urlid,$post->ID))){
 			$vars['href'] = get_permalink($post->ID);
 			$vars['title'] = $post->post_title;
 			$vars['excerpt'] = get_the_excerpt();

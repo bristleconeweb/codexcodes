@@ -12,8 +12,9 @@ function getpp_template_thumbnails($posts, $args){
 	$output = '';
 	$format = '<div class="col-xs-6 col-md-3"><a class="thumbnail" href="%2$s">%3$s<div class="text-center">%1$s</div></a></div>';
 	global $post;
+	$urlid = get_the_ID();
 	foreach( $posts as $post ) : setup_postdata($post); 
-		if(getpp_depth_permitted($args['depth'],getpp_depth(get_the_ID(),$post->ID))){
+		if(getpp_depth_permitted($args['depth'],getpp_depth($urlid,$post->ID))){
 			$excerpt = get_the_excerpt();
 			$vars['title'] = $post->post_title;
 			$vars['href'] = get_permalink($post->ID);
